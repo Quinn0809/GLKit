@@ -35,13 +35,13 @@
 - (void)uploadVertexArray{
     GLfloat vertexData[] =
     {
-        0.5, -0.1, 0.0f,    1.0f, 0.0f, //右下
-        0.5, 0.5, -0.0f,    1.0f, 1.0f, //右上
-        -0.5, 0.5, 0.0f,    0.0f, 1.0f, //左上
+        0.5, -0.1, 0.0f,    //1.0f, 0.0f, //右下
+        0.5, 0.5, -0.0f,    //1.0f, 1.0f, //右上
+        -0.5, 0.5, 0.0f,   // 0.0f, 1.0f, //左上
         
-        0.5, -0.1, 0.0f,    1.0f, 0.0f, //右下
-        -0.5, 0.5, 0.0f,    0.0f, 1.0f, //左上
-        -0.5, -0.1, 0.0f,   0.0f, 0.0f, //左下
+//        0.5, -0.1, 0.0f,    1.0f, 0.0f, //右下
+//        -0.5, 0.5, 0.0f,    0.0f, 1.0f, //左上
+//        -0.5, -0.1, 0.0f,   0.0f, 0.0f, //左下
     };
     GLuint buffer;
     glGenBuffers(1, &buffer);
@@ -49,9 +49,9 @@
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData), vertexData, GL_STATIC_DRAW);
     
     glEnableVertexAttribArray(GLKVertexAttribPosition);
-    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, (GLfloat *)NULL + 0);
-    glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
-    glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, (GLfloat *)NULL + 3);
+    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, (GLfloat *)NULL + 0);
+//    glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
+//    glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, (GLfloat *)NULL + 3);
     
     /*
      glVertexAttribPointer函数的参数非常多，所以我会逐一介绍它们：
@@ -70,12 +70,12 @@
 }
 - (void)uploadTexture{
     //texture
-    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"leaves" ofType:@"gif"];
-    NSDictionary* options = [NSDictionary dictionaryWithObjectsAndKeys:@(1), GLKTextureLoaderOriginBottomLeft, nil];//GLKTextureLoaderOriginBottomLeft 纹理坐标系是相反的
-    GLKTextureInfo* textureInfo = [GLKTextureLoader textureWithContentsOfFile:filePath options:options error:nil];
+//    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"leaves" ofType:@"gif"];
+//    NSDictionary* options = [NSDictionary dictionaryWithObjectsAndKeys:@(1), GLKTextureLoaderOriginBottomLeft, nil];//GLKTextureLoaderOriginBottomLeft 纹理坐标系是相反的
+//    GLKTextureInfo* textureInfo = [GLKTextureLoader textureWithContentsOfFile:filePath options:options error:nil];
     self.baseEffect = [[GLKBaseEffect alloc] init];
-    self.baseEffect.texture2d0.enabled = GL_TRUE;
-    self.baseEffect.texture2d0.name = textureInfo.name;
+//    self.baseEffect.texture2d0.enabled = GL_TRUE;
+//    self.baseEffect.texture2d0.name = textureInfo.name;
 }
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect{
     glClearColor(0.1f, 0.1f, 1.0f, 1.0f);
@@ -86,7 +86,7 @@
 
     
     //    glDrawArrays(GL_LINES, 0, 3);
-    glDrawArrays(GL_TRIANGLES, 0, 6);
+    glDrawArrays(GL_TRIANGLES, 0, 3);
     
 }
 @end
